@@ -2,12 +2,6 @@ FROM node:18-slim
 
 WORKDIR /app
 
-# Install required packages
-RUN apt-get update && apt-get install -y \
-    python3 \
-    build-essential \
-    && rm -rf /var/lib/apt/lists/*
-
 # Install global dependencies
 RUN npm install -g typescript
 
@@ -15,10 +9,10 @@ RUN npm install -g typescript
 COPY package*.json ./
 
 # Install dependencies (use ci for faster, reproducible builds)
-RUN npm ci --only=production
+RUN npm ci --ignore-scripts
 
 # Copy source code
-COPY . .
+COPY src/ ./src/
 
 # Build the project
 RUN npm run build
