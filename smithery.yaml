@@ -1,5 +1,70 @@
 # Smithery configuration file: https://smithery.ai/docs/config#smitheryyaml
 
+name: komga-book-search
+description: Search and read your Komga ebook collection through AI using Model Context Protocol
+license: MIT
+version: 0.6.0
+author: sylweriusz
+repository: https://github.com/sylweriusz/komga-ebook-library
+
+# Documentation sections
+documentation:
+  overview: |
+    MCP server for Komga digital libraries that enables AI assistants to search and read ebooks.
+    Provides smart format detection (EPUB/PDF), full-text search with FlexSearch, and Claude Vision OCR integration.
+    
+  installation: |
+    ### Installing via NPM
+    ```bash
+    npm install @sylweriusz/komga-book-search
+    ```
+
+    ### Via Smithery
+    ```bash
+    npx @smithery/cli install @sylweriusz/komga-book-search --client claude
+    ```
+
+    ### Manual Installation
+    Add to your `claude_desktop_config.json`:
+    ```json
+    {
+      "mcpServers": {
+        "komga-ebook-search": {
+          "command": "npx",
+          "args": ["@sylweriusz/komga-book-search"],
+          "env": {
+            "KOMGA_URL": "http://your-komga-server:25600",
+            "KOMGA_USERNAME": "your-username",
+            "KOMGA_PASSWORD": "your-password",
+            "KOMGA_LIBRARY": "your-library-filter"
+          }
+        }
+      }
+    }
+    ```
+# Tools configuration for display
+tools:
+  - name: search_library_books
+    description: Discover books across library collections with format detection
+    example: |
+      {"query": "artificial intelligence", "library_filter": "academic"}
+    
+  - name: get_book_overview
+    description: Retrieve complete book metadata including page count and format information
+    example: |
+      {"book_id": "0K79C4PQAEH7J"}
+  
+  - name: read_book_pages
+    description: Access book content with intelligent format routing (max 15 pages)
+    example: |
+      {"book_id": "0K79C4PQAEH7J", "start_page": 1, "end_page": 15}
+  
+  - name: search_within_book
+    description: Full-text search within individual books (EPUBs and text PDFs)
+    example: |
+      {"book_id": "0K79C4PQAEH7J", "search_term": "conversation strategies"}
+
+# Start command configuration
 startCommand:
   type: stdio
   configSchema:
