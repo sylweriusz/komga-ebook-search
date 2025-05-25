@@ -2,20 +2,18 @@ FROM node:18-slim
 
 WORKDIR /app
 
-# Install global dependencies
-RUN npm install -g typescript
-
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies (use ci for faster, reproducible builds)
-RUN npm ci --ignore-scripts
+# Install dependencies including dev dependencies for build
+RUN npm ci
 
-# Copy source code
+# Copy source code and TypeScript config
 COPY src/ ./src/
+COPY tsconfig.json ./
 
 # Build the project
-RUN npm run build
+RUN npx tsc
 
 # Remove dev dependencies to reduce image size
 RUN npm prune --production
