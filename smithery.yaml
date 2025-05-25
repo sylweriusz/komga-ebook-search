@@ -1,78 +1,50 @@
-name: komga-book-search
-displayName: Komga Book Search
-description: Search and read your Komga ebook collection through AI using Model Context Protocol
-author: sylweriusz
-homepage: https://github.com/sylweriusz/komga-ebook-search
-repository: https://github.com/sylweriusz/komga-ebook-search.git
-license: MIT
-version: 0.6.0
+# Smithery configuration file: https://smithery.ai/docs/config#smitheryyaml
 
-configSchema:
-  type: object
-  properties:
-    KOMGA_URL:
-      type: string
-      title: Komga Server URL
-      description: URL of your Komga server (e.g., http://localhost:25600)
-      examples:
-        - "http://localhost:25600"
-        - "http://192.168.1.100:25600"
-    KOMGA_USERNAME:
-      type: string
-      title: Username
-      description: Komga authentication username
-      examples:
-        - "admin@example.com"
-        - "your-username"
-    KOMGA_PASSWORD:
-      type: string
-      title: Password
-      description: Komga authentication password
-      format: password
-    KOMGA_LIBRARY:
-      type: string
-      title: Library Filter
-      description: Library name filter (partial match supported)
-      examples:
-        - "academic"
-        - "library"
-        - "books"
-  required:
-    - KOMGA_URL
-    - KOMGA_USERNAME
-    - KOMGA_PASSWORD
-    - KOMGA_LIBRARY
-
-tags:
-  - ebook
-  - library
-  - search
-  - komga
-  - pdf
-  - epub
-  - research
-  - academic
-
-categories:
-  - Digital Library
-  - Research Tools
-  - Content Search
-
-features:
-  - Smart format detection (EPUB/PDF)
-  - Full-text search with FlexSearch
-  - PDF text detection and OCR fallback
-  - Session-based caching
-  - Claude Vision integration
-
-mcpVersion: "2024-11-05"
-
-tools:
-  - name: search_library_books
-    description: Discover books across library collections with format detection
-  - name: get_book_overview
-    description: Retrieve complete book metadata and page information
-  - name: read_book_pages
-    description: Access book content with intelligent format routing (max 15 pages)
-  - name: search_within_book
-    description: Full-text search within individual books
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    required:
+      - KOMGA_URL
+      - KOMGA_USERNAME
+      - KOMGA_PASSWORD
+      - KOMGA_LIBRARY
+    properties:
+      KOMGA_URL:
+        type: string
+        title: "Komga Server URL"
+        description: "URL of your Komga server (e.g., http://localhost:25600)"
+        examples:
+          - "http://localhost:25600"
+          - "http://192.168.1.100:25600"
+      KOMGA_USERNAME:
+        type: string
+        title: "Username"
+        description: "Komga authentication username"
+        examples:
+          - "admin@example.com"
+          - "your-username"
+      KOMGA_PASSWORD:
+        type: string
+        title: "Password"
+        description: "Komga authentication password"
+        format: password
+      KOMGA_LIBRARY:
+        type: string
+        title: "Library Filter"
+        description: "Library name filter (partial match supported)"
+        examples:
+          - "academic"
+          - "library"
+          - "books"
+  commandFunction: |-
+    (config) => ({
+      command: "npx",
+      args: ["@sylweriusz/komga-book-search"],
+      env: {
+        KOMGA_URL: config.KOMGA_URL,
+        KOMGA_USERNAME: config.KOMGA_USERNAME,
+        KOMGA_PASSWORD: config.KOMGA_PASSWORD,
+        KOMGA_LIBRARY: config.KOMGA_LIBRARY
+      }
+    })
