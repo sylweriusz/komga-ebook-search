@@ -48,7 +48,7 @@ Add to your Claude Desktop configuration:
   "mcpServers": {
     "komga-ebook-search": {
       "command": "npx",
-      "args": ["@sylweriusz/komga-ebook-search"],
+      "args": ["@sylweriusz/komga-book-search"],
       "env": {
         "KOMGA_URL": "http://your-komga-server:25600",
         "KOMGA_USERNAME": "your-username",
