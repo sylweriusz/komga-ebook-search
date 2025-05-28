@@ -2,7 +2,7 @@
 
 **Search and read your Komga ebook collection through AI using Model Context Protocol**
 
-[![NPM Version](https://img.shields.io/npm/v/@sylweriusz/komga-ebook-search)](https://www.npmjs.com/package/@sylweriusz/komga-ebook-search)
+[![NPM Version](https://img.shields.io/npm/v/@sylweriusz/komga-book-search)](https://www.npmjs.com/package/@sylweriusz/komga-ebook-search)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Connect your [Komga](https://komga.org/) digital library to AI assistants like Claude, enabling intelligent book discovery, content reading, and full-text search across your ebook collection.
