@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/sylweriusz-komga-ebook-search-badge.png)](https://mseep.ai/app/sylweriusz-komga-ebook-search)
+
 # Komga Ebook Library
 
 **Search and read your Komga ebook collection through AI using Model Context Protocol**
